@@ -1,4 +1,4 @@
-from calc import *
+from src.calc import *
 
 def main():
     expr = input("Введите выражение: ")

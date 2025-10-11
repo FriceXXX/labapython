@@ -1,3 +1,5 @@
+from src.constants import operators
+
 def solve(expression):
     expression = expression.replace("(", " ( ")
     expression = expression.replace(")", " ) ")
@@ -7,14 +9,8 @@ def solve(expression):
 
 def rpn_calculator(expression):
     stack = []
-    operators = {
-        '+': lambda x, y: x + y,
-        '-': lambda x, y: x - y,
-        '*': lambda x, y: x * y,
-        '/': lambda x, y: x / y,
-        '**': lambda x, y: x ** y
-    }
 
+    global operators
     tokens = expression.split()
     i = 0
 
