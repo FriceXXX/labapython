@@ -1,4 +1,4 @@
-from src.constants import operators
+from src.operations import operators
 
 def solve(expression):
     expression = expression.replace("(", " ( ")
