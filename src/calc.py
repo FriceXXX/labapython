@@ -2,8 +2,8 @@ from src.operations import OPERATORS
 from src.exception import CalcError
 
 def solve(expression):
-    expression = expression.replace("(", " ( ")
-    expression = expression.replace(")", " ) ")
+    expression = expression.replace("(", "( ")
+    expression = expression.replace(")", " )")
     expression = expression.replace("  ", " ")
     answer = rpn_calculator(expression)
     return answer
@@ -18,11 +18,15 @@ def rpn_calculator(expression):
     while i < len(tokens):
         token = tokens[i]
 
-        if token == '(':
+        if token == '(' or token == '-(':
+            neg = False
+            if token == '-(':
+                neg = True
             bracket_count = 1
             j = i + 1
+            token = '('
             while j < len(tokens) and bracket_count > 0:
-                if tokens[j] == '(':
+                if tokens[j] == '(' or tokens[j] == '-(':
                     bracket_count += 1
                 elif tokens[j] == ')':
                     bracket_count -= 1
@@ -32,6 +36,8 @@ def rpn_calculator(expression):
 
             try:
                 result = rpn_calculator(inner_expression)
+                if neg:
+                    result = -result
                 stack.append(result)
             except Exception as e:
                 return f"Ошибка в выражении внутри скобок: {e}"
