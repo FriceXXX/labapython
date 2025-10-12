@@ -40,7 +40,7 @@ def rpn_calculator(expression):
                     result = -result
                 stack.append(result)
             except Exception as e:
-                return f"Ошибка в выражении внутри скобок: {e}"
+                raise CalcError(f"Ошибка в выражении внутри скобок: {e}")
 
             i = j
             continue
@@ -65,16 +65,16 @@ def rpn_calculator(expression):
                 result = OPERATORS[token](a, b)
                 stack.append(result)
             except Exception as e:
-                return f"Ошибка при выполнении операции: {e}"
+                raise CalcError(f"Ошибка при выполнении операции: {e}")
         else:
-            return f"Ошибка: Неизвестный токен '{token}'"
+            raise CalcError(f"Ошибка: Неизвестный токен '{token}'")
 
         i += 1
 
     if len(stack) == 0:
         raise CalcError("Ошибка: Пустое выражение")
     elif len(stack) > 1:
-        return f"Ошибка: В выражении остались неиспользованные числа: {stack}"
+        raise CalcError(f"Ошибка: В выражении остались неиспользованные числа: {stack}")
 
     return stack[0]
 
