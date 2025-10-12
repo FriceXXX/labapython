@@ -1,4 +1,5 @@
-from src.operations import operators
+from src.operations import OPERATORS
+from src.exception import CalcError
 
 def solve(expression):
     expression = expression.replace("(", " ( ")
@@ -10,7 +11,7 @@ def solve(expression):
 def rpn_calculator(expression):
     stack = []
 
-    global operators
+    global OPERATORS
     tokens = expression.split()
     i = 0
 
@@ -39,23 +40,23 @@ def rpn_calculator(expression):
             continue
 
         elif token == ')':
-            return "Ошибка: Несогласованные скобки"
+            raise CalcError("Ошибка: Несогласованные скобки")
 
         elif token.replace('.', '').replace('-', '').isdigit():
             stack.append(float(token))
 
-        elif token in operators:
+        elif token in OPERATORS:
             if len(stack) < 2:
-                return "Ошибка: Недостаточно операндов для операции"
+                raise CalcError("Ошибка: Недостаточно операндов для операции")
 
             try:
                 b = stack.pop()
                 a = stack.pop()
 
                 if token == '/' and b == 0:
-                    return "Ошибка: Деление на ноль"
+                    raise CalcError("Ошибка: Деление на ноль")
 
-                result = operators[token](a, b)
+                result = OPERATORS[token](a, b)
                 stack.append(result)
             except Exception as e:
                 return f"Ошибка при выполнении операции: {e}"
@@ -65,7 +66,7 @@ def rpn_calculator(expression):
         i += 1
 
     if len(stack) == 0:
-        return "Ошибка: Пустое выражение"
+        raise CalcError("Ошибка: Пустое выражение")
     elif len(stack) > 1:
         return f"Ошибка: В выражении остались неиспользованные числа: {stack}"
 
