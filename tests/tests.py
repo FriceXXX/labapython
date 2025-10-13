@@ -1,7 +1,7 @@
 import pytest
 
-from src.calc import *
-from src.exception import *
+from src.calc import solve
+from src.exception import CalcError
 
 @pytest.mark.parametrize('expression, result', [
     ('4 3 +', 7),
