@@ -11,7 +11,6 @@ def solve(expression):
 def rpn_calculator(expression):
     stack = []
 
-    global OPERATORS
     tokens = expression.split()
     i = 0
 
