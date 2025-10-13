@@ -6,7 +6,7 @@ def solve(expression):
     expression = expression.replace(")", " )")
     expression = expression.replace("  ", " ")
     answer = rpn_calculator(expression)
-    return answer
+    return round(answer, 2)
 
 def rpn_calculator(expression):
     stack = []
