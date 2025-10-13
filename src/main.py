@@ -2,12 +2,12 @@ from src.calc import solve
 
 def main():
     while True:
-        expression = input('Enter expression: ')
-        if expression == 'exit':
+        expression = input('Введите выражение в обратной польской нотации: ')
+        if expression == 'exit' or expression == 'quit' or expression == 'q' or expression == 'выход':
             exit()
 
         try:
-            print('>>', solve(expression))
+            print('Ответ: ', solve(expression))
         except Exception as e:
             print(f'Error: {e}')
 
