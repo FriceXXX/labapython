@@ -1,4 +1,4 @@
-from src.calc import *
+from src.calc import solve
 
 def main():
     while True:
