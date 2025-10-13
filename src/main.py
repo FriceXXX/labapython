@@ -7,7 +7,7 @@ def main():
             exit()
 
         try:
-            print('Ответ: ', solve(expression))
+            print('Ответ:  ', solve(expression))
         except Exception as e:
             print(f'Error: {e}')
 
